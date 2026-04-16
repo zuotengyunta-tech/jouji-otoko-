@@ -242,7 +242,7 @@
       <h2>男磨きジョージ 全動画</h2>
       <div id="videos-wrapper">
         <div id="videos"></div>
-        <div id="loading">全動画を読み込み中...（チャンネル全体取得）</div>
+        <div id="loading">男磨きジョージの本アカウント全動画を取得中...（新しい順）</div>
       </div>
     </div>
   </div>
@@ -254,7 +254,7 @@
 <script>
   // === 設定 ===
   const apiKey = "AIzaSyAxk1YpQSe-qDtFUSUmnjnduanag41Mlyk";
-  const channelId = "UCqRV_ZIQhVKfxG1_WkNiRbg";  // 男磨きジョージの本アカウント
+  const channelId = "UCM4qOCYKzBbuK1qK3YW9Fvg";  // 男磨きジョージ 本アカウント（@coachjoji）
   const historyKey = "frann_history_男磨きジョージ全動画";
 
   // === DOM ===
@@ -342,9 +342,9 @@
     let items = [];
     let pageToken = "";
     let pageCount = 0;
-    const maxPages = 50;  // 多くの動画を取得可能に
+    const maxPages = 60;
 
-    loadingEl.textContent = "チャンネル全動画を高速取得中...";
+    loadingEl.textContent = "男磨きジョージの本アカウント全動画を取得中...";
 
     do {
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=50&order=date&type=video&key=${apiKey}&pageToken=${pageToken}`;
@@ -358,8 +358,7 @@
       
       loadingEl.textContent = `取得中... ${items.length}本 (${pageCount}ページ)`;
       
-      // 少し待機してAPI制限を回避
-      if (pageToken) await new Promise(r => setTimeout(r, 300));
+      if (pageToken) await new Promise(r => setTimeout(r, 350));
     } while (pageToken && pageCount < maxPages);
 
     return items;
